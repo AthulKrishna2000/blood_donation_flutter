@@ -1,4 +1,5 @@
 import 'package:blood_donation_app/core/theme/app_theme.dart';
+import 'package:blood_donation_app/features/auth/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,11 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Blood Donation App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const Scaffold(
-        body: Center(
-          child: Text("Blood Donation App 🩸", style: TextStyle(fontSize: 20)),
-        ),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
