@@ -1,21 +1,19 @@
 import 'dart:ui';
 
 import 'package:blood_donation_app/features/auth/data/auth_service.dart';
-import 'package:blood_donation_app/features/auth/presentation/screen/register_screen.dart';
 import 'package:blood_donation_app/features/auth/presentation/widget/glass_container.dart';
 import 'package:blood_donation_app/features/auth/presentation/widget/login_button.dart';
 import 'package:blood_donation_app/features/auth/presentation/widget/text_field.dart';
-import 'package:blood_donation_app/routing/routes.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -31,8 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBodyBehindAppBar: true, // ✅ important
-        backgroundColor: Colors.transparent, // ✅ important
         body: SingleChildScrollView(
           child: ClipRect(
             child: Container(
@@ -60,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Be a Hero Today",
+                                  "Register Now",
                                   style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
@@ -76,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 SizedBox(height: 10),
                                 Text(
-                                  "welcome to the  community that saves lives ",
+                                  "register now to join the  community that saves lives ",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -147,27 +143,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () => Navigator.pushNamed(
-                                    context,
-                                    registerScreen,
-                                  ),
-                                  child: Text(
-                                    "forgot password?",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10,
-                                          color: Colors.black,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                             const SizedBox(height: 5),
@@ -186,8 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: true,
                             ),
                             const SizedBox(height: 20),
+
                             LoginButton(
-                              buttonText: "Login",
+                              buttonText: "Register",
                               onPressed: () async {
                                 print(_formKey.currentState!.validate());
 
@@ -200,16 +176,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .trim();
 
                                   try {
-                                    await AuthService().login(email, password);
+                                    await AuthService().register(
+                                      email,
+                                      password,
+                                    );
 
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text("Login Successful"),
+                                        content: Text(
+                                          "Registered Successfully",
+                                        ),
                                       ),
                                     );
                                   } catch (e) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Login Failed")),
+                                      SnackBar(content: Text(e.toString())),
                                     );
                                   }
 
@@ -221,6 +202,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?",
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.7),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

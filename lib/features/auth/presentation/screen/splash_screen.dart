@@ -13,14 +13,24 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
-      );
-    });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _loadAndNavigate();
+  }
+
+  Future<void> _loadAndNavigate() async {
+    // ✅ Preload background image
+    await precacheImage(const AssetImage('assets/log.png'), context);
+
+    // Optional delay (for splash feel)
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    // Navigate after image is ready
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
   }
 
   @override

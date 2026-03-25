@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String buttonText;
 
-  const LoginButton({super.key});
+  const LoginButton({super.key, this.onPressed, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class LoginButton extends StatelessWidget {
               shadowColor: Colors.transparent,
               padding: EdgeInsets.zero,
             ),
-            onPressed: () {},
+            onPressed: onPressed,
             child: Ink(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -33,20 +35,14 @@ class LoginButton extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.4),
-                ),
+                border: Border.all(color: Colors.white.withOpacity(0.4)),
                 boxShadow: [
-                  BoxShadow(
-                    color: Colors.red,
-                    blurRadius: 15,
-                    spreadRadius: 1,
-                  ),
+                  BoxShadow(color: Colors.red, blurRadius: 15, spreadRadius: 1),
                 ],
               ),
-              child: const Center(
+              child:  Center(
                 child: Text(
-                  "Login",
+                  buttonText,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
