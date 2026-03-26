@@ -1,9 +1,12 @@
 import 'package:blood_donation_app/core/theme/app_theme.dart';
 import 'package:blood_donation_app/features/auth/presentation/screen/splash_screen.dart';
+import 'package:blood_donation_app/features/profile/bloc/profile_bloc.dart';
+import 'package:blood_donation_app/features/profile/data/user_service.dart';
 import 'package:blood_donation_app/routing/routing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +20,16 @@ void main() async {
     ),
   );
 
-  runApp(const MyApp());
+runApp(
+  MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => ProfileBloc(UserService())),
+      // later:
+      // BlocProvider(create: (_) => AuthBloc()),
+    ],
+    child: const MyApp(),
+  ),
+);
 }
 
 class MyApp extends StatelessWidget {

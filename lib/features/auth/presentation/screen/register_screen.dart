@@ -181,14 +181,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       password,
                                     );
 
+                                    if (!mounted) return;
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text(
-                                          "Registered Successfully",
+                                          "Registered Successfully - you can now login",
                                         ),
                                       ),
                                     );
+                                    Navigator.pop(context);
                                   } catch (e) {
+                                    if (!mounted) return;
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text(e.toString())),
                                     );
@@ -203,27 +208,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.7),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Register",
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Text(
+                      //       "Don't have an account?",
+                      //       style: TextStyle(
+                      //         color: Colors.white.withValues(alpha: 0.7),
+                      //       ),
+                      //     ),
+                      //     TextButton(
+                      //       onPressed: () {},
+                      //       child: const Text(
+                      //         "Register",
+                      //         style: TextStyle(
+                      //           color: Colors.red,
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

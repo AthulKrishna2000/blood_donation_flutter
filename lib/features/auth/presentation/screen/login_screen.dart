@@ -202,12 +202,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   try {
                                     await AuthService().login(email, password);
 
+                                    if (!mounted) return;
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text("Login Successful"),
                                       ),
                                     );
+
+                                    if (!mounted) return;
+                                    Navigator.pushReplacementNamed(context, homeScreen);
                                   } catch (e) {
+                                    if (!mounted) return;
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text("Login Failed")),
                                     );
@@ -221,6 +228,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?",
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.7),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, registerScreen);
+                            },
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
