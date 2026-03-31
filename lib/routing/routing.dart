@@ -1,7 +1,7 @@
 import 'package:blood_donation_app/app/view/custom_page_transition.dart';
 import 'package:blood_donation_app/features/auth/presentation/screen/register_screen.dart';
 import 'package:blood_donation_app/features/presentation/view/homes_screen.dart';
-import 'package:blood_donation_app/features/profile/view/profile_screen.dart';
+import 'package:blood_donation_app/features/profile/view/edit_profile_screen.dart';
 import 'package:blood_donation_app/routing/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class AppRouter {
       case homeScreen:
         return customPageTransition(const HomeScreen(), settings);
         case profileScreen:
-        return customPageTransition(const ProfileScreen(), settings);
+        return customPageTransition(const EditProfileScreen(), settings);
       default:
         return customPageTransition(Container(), settings);
     }

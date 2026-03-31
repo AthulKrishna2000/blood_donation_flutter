@@ -23,10 +23,10 @@ class ProfileTextField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.black.withOpacity(0.35),
+        fillColor: Colors.white, // background color of the text field
 
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
+        hintStyle: TextStyle(color: Colors.black),
 
         // ✅ SHOW ERROR TEXT CLEARLY
         errorStyle: const TextStyle(
@@ -38,8 +38,8 @@ class ProfileTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.white.withOpacity(0.3),
-            width: 1,
+            color: Colors.grey.withOpacity(0.5),
+            width: 0.5,
           ),
         ),
 

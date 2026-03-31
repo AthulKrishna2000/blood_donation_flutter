@@ -1,14 +1,14 @@
 import 'package:blood_donation_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    fontFamily: 'Public Sans',
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
-    
+
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.appBarBackground,
       elevation: 0,
     ),
 
@@ -22,9 +22,7 @@ class AppTheme {
     ),
 
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
     ),
   );
 }

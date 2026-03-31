@@ -20,9 +20,15 @@ class CustomDropdown extends StatelessWidget {
       value: selectedValue,
       hint: Text(hint),
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(width: 0.1, color: Colors.grey),
+        ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        filled: true,
+        fillColor: Colors.white,
       ),
+
       items: items.map((item) {
         return DropdownMenuItem(value: item, child: Text(item));
       }).toList(),
