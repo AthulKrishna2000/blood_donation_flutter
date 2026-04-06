@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    fontFamily: 'Public Sans',
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
 

@@ -25,6 +25,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         final userModel = UserModel(
           uid: user.uid,
+          firstName: event.firstName,
+          lastName: event.lastName,
           email: user.email ?? "",
           bloodGroup: event.bloodGroup,
           phone: event.phone,
@@ -34,9 +36,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
         await UserService().saveUser(userModel);
 
+        // Emit success state with the updated user model directly
         emit(
-          state.copyWith(isLoading: false, isSuccess: true, errorMessage: null),
+          state.copyWith(
+            user: userModel,
+            profileState: ProfileStateVal.success,
+            isLoading: false,
+            isSuccess: true,
+            profileErrorMessage: null,
+            errorMessage: null,
+          ),
         );
+
+        // emit(
+        //   state.copyWith(isLoading: false, isSuccess: true, errorMessage: null),
+        // );
       } catch (e) {
         emit(
           state.copyWith(
@@ -52,5 +66,57 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ClearErrorEvent>((event, emit) {
       emit(state.copyWith(errorMessage: null, isSuccess: false));
     });
+    // LoadProfileEvent handler
+    on<LoadProfileEvent>(_ongetProfiledetails);
+  }
+  void _ongetProfiledetails(
+    LoadProfileEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        profileState: ProfileStateVal.loading,
+        profileErrorMessage: null,
+      ),
+    );
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      emit(
+        state.copyWith(
+          profileState: ProfileStateVal.error,
+          profileErrorMessage: 'Authentication required. Please log in again.',
+        ),
+      );
+      return;
+    }
+
+    try {
+      final userDetails = await UserService().getUser(user.uid);
+
+      if (userDetails != null) {
+        emit(
+          state.copyWith(
+            user: userDetails,
+            profileState: ProfileStateVal.success,
+            profileErrorMessage: null,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            profileState: ProfileStateVal.error,
+            profileErrorMessage: 'User profile not found.',
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          profileState: ProfileStateVal.error,
+          profileErrorMessage: 'Failed to load profile: ${e.toString()}',
+        ),
+      );
+    }
   }
 }

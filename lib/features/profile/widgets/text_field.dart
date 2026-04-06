@@ -17,7 +17,7 @@ class ProfileTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       style: const TextStyle(
-        color: Colors.white, // typed text color
+        color: Colors.black, // typed text color
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),

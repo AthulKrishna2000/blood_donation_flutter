@@ -10,7 +10,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final String initialBloodGroup;
+  final String initialPhone;
+  final String initialLocation;
+  final String initialFirstName;
+  final String initialLastName;
+  const EditProfileScreen({
+    super.key,
+    required this.initialBloodGroup,
+    required this.initialPhone,
+    required this.initialLocation,
+    required this.initialFirstName,
+    required this.initialLastName,
+  });
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -19,6 +31,8 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final phoneController = TextEditingController();
   final locationController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
   final List<String> bloodGroups = [
     "A+",
@@ -38,6 +52,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Set initial values
+    phoneController.text = widget.initialPhone;
+    locationController.text = widget.initialLocation;
+    firstNameController.text = widget.initialFirstName;
+    lastNameController.text = widget.initialLastName;
+
+    context.read<ProfileBloc>().add(
+      BloodGroupChanged(widget.initialBloodGroup),
+    );
 
     // Add listeners to clear errors when user starts typing
     phoneController.addListener(() {
@@ -169,7 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       children: [
                         const SizedBox(height: 10),
                         Text(
-                          " FULL NAME",
+                          " FIRST NAME",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -178,9 +202,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         SizedBox(height: 4),
                         ProfileTextField(
-                          controller: phoneController,
+                          controller: firstNameController,
                           keyboardType: TextInputType.text,
-                          hint: "Full Name",
+                          hint: "First Name",
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          " LAST NAME",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textLight,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        ProfileTextField(
+                          controller: lastNameController,
+                          keyboardType: TextInputType.text,
+                          hint: "Last Name",
                         ),
 
                         const SizedBox(height: 10),
@@ -298,6 +337,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                                 bloc.add(
                                   SaveProfileEvent(
+                                    firstName: firstNameController.text,
+                                    lastName: lastNameController.text,
+
                                     bloodGroup: state.bloodGroup!,
                                     phone: phoneController.text,
                                     location: locationController.text,
