@@ -2,7 +2,7 @@ import 'package:blood_donation_app/core/theme/app_colors.dart';
 import 'package:blood_donation_app/features/profile/bloc/profile_bloc.dart';
 import 'package:blood_donation_app/features/profile/bloc/profile_event.dart';
 import 'package:blood_donation_app/features/profile/bloc/profile_state.dart';
-import 'package:blood_donation_app/features/profile/view/edit_profile_screen.dart';
+
 import 'package:blood_donation_app/features/profile/widgets/blood_type_widget.dart';
 import 'package:blood_donation_app/features/profile/widgets/person_details_widget.dart';
 import 'package:blood_donation_app/features/profile/widgets/profile_name_widget.dart';

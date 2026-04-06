@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.primary,
       body: Center(
         child: Text(
-          "Donate Blood ❤️",
+          " VITAL PLUS❤️",
           style: TextStyle(
             fontSize: 24,
             color: Colors.white,

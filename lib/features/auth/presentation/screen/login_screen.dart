@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:blood_donation_app/features/auth/data/auth_service.dart';
-import 'package:blood_donation_app/features/auth/presentation/screen/register_screen.dart';
+
 import 'package:blood_donation_app/features/auth/presentation/widget/glass_container.dart';
 import 'package:blood_donation_app/features/auth/presentation/widget/login_button.dart';
 import 'package:blood_donation_app/features/auth/presentation/widget/text_field.dart';
@@ -211,7 +211,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     );
 
                                     if (!mounted) return;
-                                    Navigator.pushReplacementNamed(context, homeScreen);
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      dashboardScreen,
+                                    );
                                   } catch (e) {
                                     if (!mounted) return;
 

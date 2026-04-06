@@ -1,3 +1,4 @@
+import 'package:blood_donation_app/core/theme/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,16 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Blood Connect 🩸"),
+        backgroundColor: AppColors.appBarBackground,
+        centerTitle: true,
+        title: const Text(
+          "Vital Pulse",
+          style: TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () async {
