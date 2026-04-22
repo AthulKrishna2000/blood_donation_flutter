@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../domain/user_model.dart';
+import '../features/profile/domain/user_model.dart';
 
 class UserService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,5 +28,23 @@ class UserService {
       );
     }
     return null;
+  }
+
+
+  Future<List<UserModel>> getAllUsers() async {
+    final querySnapshot = await _firestore.collection("users").get();
+    return querySnapshot.docs.map((doc) {
+      final data = doc.data();
+      return UserModel(
+        uid: data["uid"],
+        firstName: data["firstName"] ?? '',
+        lastName: data["lastName"] ?? '',
+        email: data["email"] ?? '',
+        bloodGroup: data["bloodGroup"] ?? '',
+        phone: data["phone"] ?? '',
+        location: data["location"] ?? '',
+        isDonor: data["isDonor"] ?? false,
+      );
+    }).toList();
   }
 }

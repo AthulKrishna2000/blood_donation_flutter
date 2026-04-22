@@ -1,8 +1,9 @@
 import 'package:blood_donation_app/core/theme/app_theme.dart';
 import 'package:blood_donation_app/features/auth/presentation/screen/splash_screen.dart';
 import 'package:blood_donation_app/features/dashboard/bloc/dashboard_bloc.dart';
+import 'package:blood_donation_app/features/donor/bloc/donor_bloc.dart';
 import 'package:blood_donation_app/features/profile/bloc/profile_bloc.dart';
-import 'package:blood_donation_app/features/profile/data/user_service.dart';
+import 'package:blood_donation_app/data/user_service.dart';
 import 'package:blood_donation_app/routing/routing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ void main() async {
         // later:
         // BlocProvider(create: (_) => AuthBloc()),
         BlocProvider(create: (_) => DashboardBloc()),
+        BlocProvider(create: (_) => DonorBloc(UserService())),
       ],
       child: const MyApp(),
     ),

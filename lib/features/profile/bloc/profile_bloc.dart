@@ -1,6 +1,6 @@
 import 'package:blood_donation_app/features/profile/bloc/profile_event.dart';
 import 'package:blood_donation_app/features/profile/bloc/profile_state.dart';
-import 'package:blood_donation_app/features/profile/data/user_service.dart';
+import 'package:blood_donation_app/data/user_service.dart';
 import 'package:blood_donation_app/features/profile/domain/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
