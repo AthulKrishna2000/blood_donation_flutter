@@ -12,9 +12,8 @@ class LoadDonorsEvent extends DonorEvent {}
 class FilterDonorsEvent extends DonorEvent {
   final String bloodGroup;
 
-
   const FilterDonorsEvent({required this.bloodGroup});
 
   @override
-  List<Object> get props => [bloodGroup, ];
+  List<Object> get props => [bloodGroup];
 }

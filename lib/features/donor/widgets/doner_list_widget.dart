@@ -34,6 +34,7 @@ class DonerListWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -156,7 +157,7 @@ class DonerListWidget extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Could not open dialer')),
           );
-        }
+        } 
       } catch (_) {
         ScaffoldMessenger.of(
           context,

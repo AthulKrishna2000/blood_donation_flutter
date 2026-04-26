@@ -18,7 +18,13 @@ class DonorBloc extends Bloc<DonorEvent, DonorState> {
     try {
       final users = await userService.getAllUsers();
       allUsers = users;
-      emit(state.copyWith(donors: users, donorState: DonorStateVal.success));
+      emit(
+        state.copyWith(
+          donors: users,
+          donorState: DonorStateVal.success,
+          selectedBloodGroup: 'All',
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
@@ -29,7 +35,14 @@ class DonorBloc extends Bloc<DonorEvent, DonorState> {
     }
   }
 
-  void _filterDonors(FilterDonorsEvent event, Emitter<DonorState> emit) {
+  Future<void> _filterDonors(
+    FilterDonorsEvent event,
+    Emitter<DonorState> emit,
+  ) async {
+    emit(state.copyWith(donorState: DonorStateVal.loading, errorMessage: null));
+    // Make the filtering asynchronous so the loading state can be rendered.
+    await Future.delayed(const Duration(milliseconds: 150));
+
     final filteredDonors = allUsers.where((user) {
       final matchesBloodGroup = user.bloodGroup == event.bloodGroup;
 
@@ -37,7 +50,11 @@ class DonorBloc extends Bloc<DonorEvent, DonorState> {
     }).toList();
 
     emit(
-      state.copyWith(donors: filteredDonors, donorState: DonorStateVal.success),
+      state.copyWith(
+        donors: filteredDonors,
+        selectedBloodGroup: event.bloodGroup, // Corrected the typo here
+        donorState: DonorStateVal.success,
+      ),
     );
   }
 }
